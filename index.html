@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#162b35">
+  <meta name="description" content="Virtual lab fisika gerak parabola. Atur parameter, luncurkan proyektil, dan temukan hubungan sudut, kecepatan, serta gravitasi.">
+  <title>Parabola — Virtual Lab Fisika</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="physics.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-orbit" viewBox="0 0 24 24"><path d="M3 18C7-4 17-4 21 18M3 18h18"/><circle cx="15" cy="5" r="2"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5v16M12 5C8 2 3 3 3 3v16s5-1 9 2c4-3 9-2 9-2V3s-5-1-9 2Z"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-notes" viewBox="0 0 24 24"><path d="M14 3H5v18h14V8ZM14 3v5h5M8 12h8M8 16h6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 10a9 9 0 1 1 2 8M3 4v6h6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v1"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+  </defs></svg>
+  <a class="skip-link" href="#main">Lewati navigasi</a>
+  <aside class="sidebar">
+    <a class="brand" href="#simulasi" aria-label="Parabola beranda"><span class="brand-mark"><svg><use href="#i-orbit"/></svg></span><span>parabola<span class="brand-dot">.</span><small>VIRTUAL PHYSICS LAB</small></span></a>
+    <div class="sidebar-rule"></div>
+    <p class="nav-label">RUANG BELAJAR</p>
+    <nav aria-label="Navigasi utama">
+      <a href="#simulasi" class="nav-link active" data-page="simulasi"><svg><use href="#i-grid"/></svg>Simulasi<span class="nav-dot"></span></a>
+      <a href="#panduan" class="nav-link" data-page="panduan"><svg><use href="#i-book"/></svg>Panduan & teori</a>
+      <a href="#tantangan" class="nav-link" data-page="tantangan"><svg><use href="#i-target"/></svg>Tantangan<span class="count-badge">3</span></a>
+      <a href="#catatan" class="nav-link" data-page="catatan"><svg><use href="#i-notes"/></svg>Catatan lab</a>
+    </nav>
+    <div class="sidebar-bottom"><div class="mini-orbit"><svg><use href="#i-orbit"/></svg></div><p>Rasa ingin tahu.<br><strong>Awal setiap penemuan.</strong></p><span>FISIKA · TPB ITB</span></div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar"><div class="breadcrumb">Virtual lab <svg><use href="#i-chevron"/></svg><strong>Gerak parabola</strong></div><span class="browser-badge"><span></span>Berjalan di browser</span><span class="course-badge">Fisika Dasar</span></header>
+    <main id="main">
+      <section id="page-simulasi" class="page" aria-labelledby="sim-title">
+        <div class="page-heading"><div><h1 id="sim-title">Gerak parabola<span>.</span></h1><p>Satu peluncuran, dua arah gerak. Temukan fisika di balik lintasannya.</p></div><button class="button secondary guide-button" data-navigate="panduan"><svg><use href="#i-book"/></svg>Petunjuk lab</button></div>
+        <div class="lab-layout">
+          <section class="simulation-panel" aria-labelledby="canvas-heading">
+            <div class="panel-heading"><h2 id="canvas-heading"><span class="live-dot"></span>Ruang eksperimen</h2><span id="sim-status" class="status">Siap diluncurkan</span></div>
+            <div class="canvas-wrap"><canvas id="trajectory" aria-label="Grafik posisi proyektil: jarak horizontal x dan ketinggian y dalam meter. Prediksi lintasan ditampilkan sebagai garis putus-putus.">Browser Anda tidak mendukung Canvas. Hasil numerik tersedia di bawah.</canvas><div class="canvas-legend"><span><i class="legend-line"></i>Lintasan proyektil</span><span><i class="legend-dot"></i>Prediksi</span></div><div id="target-label" class="target-label" hidden></div><button id="expand" class="canvas-fit" aria-label="Tampilkan atau sembunyikan label puncak" title="Tampilkan label puncak"><svg><use href="#i-info"/></svg></button></div>
+            <div class="playback"><button id="launch" class="button primary"><svg><use href="#i-play"/></svg><span>Luncurkan</span></button><button id="reset" class="icon-button" aria-label="Ulangi simulasi" title="Ulangi simulasi"><svg><use href="#i-reset"/></svg></button><span class="playback-divider"></span><label class="speed-control" for="play-speed">Kecepatan <select id="play-speed"><option value="0.5">0,5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label><span class="time-readout"><span id="time">0,00</span> <small>s</small></span></div>
+            <div class="timeline"><input id="timeline" type="range" min="0" max="1000" value="0" aria-label="Posisi waktu simulasi"><span>0 s</span><span id="timeline-end">3,60 s</span></div>
+            <div class="live-measurements"><div><span>Posisi horizontal <i>x</i></span><strong id="live-x">0,00 <small>m</small></strong></div><div><span>Ketinggian <i>y</i></span><strong id="live-y">0,00 <small>m</small></strong></div><div><span>Kecepatan <i>v</i></span><strong id="live-v">25,00 <small>m/s</small></strong></div><span class="live-tag"><span class="live-dot"></span>DATA LANGSUNG</span></div>
+          </section>
+          <aside class="parameters" aria-labelledby="parameter-title"><div class="parameter-heading"><h2 id="parameter-title">Parameter</h2><button id="default-params" class="text-button">Reset</button></div><p class="parameter-intro">Ubah kondisi awal. Amati perbedaannya.</p>
+            <div class="parameter"><div><label for="speed">Kecepatan awal <i>v₀</i></label><span class="value-box"><output id="speed-value" for="speed">25</output><small>m/s</small></span></div><input id="speed" type="range" min="5" max="50" value="25" step="1"><div class="range-labels"><span>5 m/s</span><span>50 m/s</span></div></div>
+            <div class="parameter"><div><label for="angle">Sudut peluncuran <i>θ</i></label><span class="value-box"><output id="angle-value" for="angle">45</output><small>°</small></span></div><input id="angle" type="range" min="0" max="90" value="45" step="1"><div class="range-labels"><span>0°</span><span>90°</span></div></div>
+            <div class="parameter"><div><label for="height">Ketinggian awal <i>h₀</i></label><span class="value-box"><output id="height-value" for="height">0</output><small>m</small></span></div><input id="height" type="range" min="0" max="30" value="0" step="1"><div class="range-labels"><span>0 m</span><span>30 m</span></div></div>
+            <div class="gravity-setting"><label for="gravity">Lingkungan gravitasi</label><div class="select-wrap"><svg><use href="#i-sun"/></svg><select id="gravity"><option value="9.81">Bumi · 9,81 m/s²</option><option value="1.62">Bulan · 1,62 m/s²</option><option value="3.71">Mars · 3,71 m/s²</option></select></div></div>
+            <div class="display-options"><label for="prediction">Prediksi lintasan<input id="prediction" type="checkbox" role="switch" checked><span class="switch" aria-hidden="true"></span></label><label for="vectors">Vektor kecepatan<input id="vectors" type="checkbox" role="switch"><span class="switch" aria-hidden="true"></span></label><label for="compare">Bandingkan percobaan<input id="compare" type="checkbox" role="switch"><span class="switch" aria-hidden="true"></span></label></div>
+            <p class="model-note"><svg><use href="#i-info"/></svg>Model ideal: tanpa hambatan udara.</p>
+          </aside>
+        </div>
+        <section class="results-strip" aria-label="Prediksi hasil perhitungan"><div class="results-title"><svg><use href="#i-orbit"/></svg><span>Prediksi hasil<small>Berdasarkan parameter awal</small></span></div><div><span>Jangkauan maksimum</span><strong id="result-range">63,71 <small>m</small></strong></div><div><span>Ketinggian maksimum</span><strong id="result-height">15,93 <small>m</small></strong></div><div><span>Waktu di udara</span><strong id="result-time">3,60 <small>s</small></strong></div><button id="save-experiment" class="button secondary"><svg><use href="#i-plus"/></svg>Simpan percobaan</button></section>
+        <div class="below-lab"><section class="experiments" aria-labelledby="experiments-title"><div class="section-heading"><h2 id="experiments-title">Riwayat percobaan <span id="experiment-count">0</span></h2><button id="export-csv" class="text-button" disabled><svg><use href="#i-download"/></svg>Ekspor CSV</button></div><div class="table-scroll"><table><caption class="sr-only">Hasil percobaan tersimpan</caption><thead><tr><th>No.</th><th>v₀ <small>(m/s)</small></th><th>θ <small>(°)</small></th><th>h₀ <small>(m)</small></th><th>g <small>(m/s²)</small></th><th>Jangkauan <small>(m)</small></th><th></th></tr></thead><tbody id="experiment-rows"><tr><td colspan="7" class="empty-state">Eksperimen pertama dimulai dari rasa ingin tahu.<br><span>Simpan hasilmu untuk membandingkan lintasan.</span></td></tr></tbody></table></div></section><aside class="discovery"><span class="discovery-icon"><svg><use href="#i-info"/></svg></span><h2>Coba sudut yang berbeda.</h2><p>Apakah sudut 30° dan 60° menghasilkan jangkauan yang sama? Gunakan kecepatan yang sama dan ketinggian awal 0 m.</p><button class="text-button" id="try-complementary">Mulai eksplorasi <svg><use href="#i-arrow"/></svg></button></aside></div>
+      </section>
+      <section id="page-panduan" class="page reading-page" hidden aria-labelledby="guide-title"><div class="page-heading"><div><h1 id="guide-title">Pahami lintasannya<span>.</span></h1><p>Dua gerakan sederhana membentuk satu lintasan parabola.</p></div></div><div class="guide-intro"><h2>Mulai dengan sebuah pertanyaan.</h2><p>Apa yang terjadi jika sebuah bola dilempar miring ke atas? Bola bergerak maju sekaligus naik, lalu jatuh karena gravitasi. Gerak horizontal dan vertikal dapat dianalisis secara terpisah; keduanya berbagi waktu yang sama.</p><button class="button primary" data-navigate="simulasi">Buka ruang eksperimen <svg><use href="#i-arrow"/></svg></button></div><div class="theory-grid"><article><span class="axis-label">Sumbu x</span><h2>Kecepatan tetap.</h2><p>Tanpa hambatan udara, tidak ada percepatan horizontal. Komponen kecepatan horizontal selalu konstan.</p><div class="formula">vₓ = v₀ cos θ<br>x(t) = v₀ cos θ · t</div></article><article><span class="axis-label vertical">Sumbu y</span><h2>Gravitasi bekerja.</h2><p>Gravitasi memperlambat gerak ke atas, lalu mempercepat gerak ke bawah. Di puncak, vᵧ = 0, tetapi percepatan tetap −g.</p><div class="formula">vᵧ(t) = v₀ sin θ − gt<br>y(t) = h₀ + v₀ sin θ · t − ½gt²</div></article></div><h2 class="reading-heading">Besaran yang bisa kamu temukan</h2><details open><summary>Waktu terbang, jangkauan, dan puncak</summary><div class="detail-content"><p>Waktu terbang T diperoleh saat proyektil kembali mencapai tanah (y = 0).</p><div class="formula">T = [v₀ sin θ + √((v₀ sin θ)² + 2gh₀)] / g<br>R = v₀ cos θ · T<br>H = h₀ + (v₀ sin θ)² / (2g)</div><p>Jika h₀ = 0, rumus jangkauan menjadi R = v₀² sin(2θ) / g. Jangkauan terbesar dicapai pada θ = 45°. Sudut komplementer, seperti 30° dan 60°, memberi jangkauan yang sama.</p><p>Untuk h₀ &gt; 0, sudut optimum umumnya kurang dari 45°. Rumus singkat R = v₀² sin(2θ)/g tidak berlaku untuk ketinggian awal yang berbeda dari tanah.</p></div></details><details><summary>Cara melakukan percobaan</summary><ol class="detail-content"><li>Tentukan pertanyaan: misalnya pengaruh sudut terhadap jangkauan.</li><li>Jaga kecepatan, ketinggian, dan gravitasi tetap. Ubah satu parameter.</li><li>Luncurkan, jeda, atau geser waktu untuk mengamati gerak.</li><li>Simpan beberapa percobaan dan aktifkan perbandingan lintasan.</li><li>Tulis kesimpulan di Catatan lab dan ekspor data bila diperlukan.</li></ol></details><details><summary>Asumsi dan batas model</summary><div class="detail-content"><p>Proyektil dipandang sebagai partikel. Gravitasi seragam, tanah datar, dan hambatan udara diabaikan. Nilai Bumi 9,81 m/s², Bulan 1,62 m/s², serta Mars 3,71 m/s² merupakan pendekatan. Simulasi berhenti pada tumbukan pertama dengan tanah.</p><p>Sudut 0° dari tanah memiliki waktu terbang nol pada model ideal ini. Sudut 90° menghasilkan gerak vertikal dengan jangkauan horizontal nol.</p></div></details></section>
+      <section id="page-tantangan" class="page reading-page" hidden aria-labelledby="challenge-title"><div class="page-heading"><div><h1 id="challenge-title">Uji intuisimu<span>.</span></h1><p>Prediksi lebih dulu. Buktikan dengan eksperimen.</p></div></div><article class="target-challenge"><svg><use href="#i-target"/></svg><div><h2>Misi: tepat sasaran</h2><p>Atur kecepatan dan sudut agar proyektil mendarat pada target <strong>60 m</strong>, dengan toleransi ±2 m. Lingkungan Bumi, ketinggian awal 0 m.</p><button id="start-challenge" class="button primary">Mulai misi <svg><use href="#i-arrow"/></svg></button><button id="end-challenge" class="button secondary" hidden>Akhiri misi</button><p id="challenge-result" role="status"></p></div></article><div id="quiz-list"></div></section>
+      <section id="page-catatan" class="page reading-page" hidden aria-labelledby="notes-title"><div class="page-heading"><div><h1 id="notes-title">Catatan penemuan<span>.</span></h1><p>Data menjadi pemahaman saat kamu menuliskan alasannya.</p></div></div><section class="notes-panel"><div class="section-heading"><h2>Jurnal eksperimen</h2><span id="notes-status">Tersimpan di browser ini</span></div><label for="notes">Pertanyaan, pengamatan, dan kesimpulanmu</label><textarea id="notes" rows="13" maxlength="15000" placeholder="Pertanyaan: Bagaimana sudut memengaruhi jangkauan?&#10;&#10;Variabel tetap:&#10;Variabel yang diubah:&#10;&#10;Pengamatan:&#10;&#10;Kesimpulan:"></textarea><div class="notes-footer"><span id="notes-count">0 / 15.000 karakter</span><button id="export-notes" class="button secondary"><svg><use href="#i-download"/></svg>Unduh catatan</button></div></section><p class="storage-note">Catatan dan percobaan disimpan secara lokal. Ekspor untuk menyimpan salinan di perangkatmu.</p></section>
+      <footer class="footer"><span>parabola. <span>Belajar lewat eksperimen.</span></span><span>HTML5 · CSS · JavaScript <span class="footer-dot">/</span> Virtual Lab Fisika</span></footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
